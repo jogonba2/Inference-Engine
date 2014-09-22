@@ -29,19 +29,15 @@ class PatternMatching:
 		
 	@staticmethod
 	def _extract_name_of_data(data):
-		return re.match("\((.*)\s?\((.*)\)\)",data.strip()).groups()[0]
+		return re.match("\((.*)\s?\((.*)\)\)",data).groups()[0]
 	
 	@staticmethod
 	def _extract_values_of_data(data):
-		return re.match("\((.*)\s?\((.*)\)\)",data.strip()).groups()[1]
-		
-		
-		
-
-#br = BaseRules(["(contents (?x,?y)) ^ (?x   < 4) -> (contents (4,?y))"])
-#PatternMatching._pattern_matching("(contents(5,0))",0,br)
-		
-		
-
-
-
+		return re.match("\((.*)\s?\((.*)\)\)",data).groups()[1]
+	
+	@staticmethod
+	def _evaluate_postcondition(data):
+		aux = "(" + PatternMatching._extract_name_of_data(data).strip() + " ("
+		for value in PatternMatching._extract_values_of_data(data).split(","): aux += str(eval(value)) + ","
+		aux = aux[0:-1]+"))"
+		return aux
