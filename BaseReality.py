@@ -9,6 +9,10 @@ class BaseReality:
 	def _get_database(self): return self.database
 	def _set_son(self,obj): self.type_son = obj
 
+	def _exists_data(self,data):
+		if data in self.database: return True
+		return False
+		
 	def _get_data(self,i):
 		try:
 			return self.database[i]
@@ -31,8 +35,7 @@ class BaseReality:
 			else: print "Fact is not in the facts list !"
 			
 		
-	def _add_data(self,fact):
-		self.database.append(fact)
+	def _add_data(self,fact): self.database.append(fact)
 	
 	def _get_index_of_data(self,fact):
 		try:
